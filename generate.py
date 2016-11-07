@@ -40,7 +40,7 @@ for life_year in range(0,80):
         rect = svgwrite.shapes.Rect(
             insert=(str(boxes_x_margin + week * box_width) + 'mm', str(boxes_y_margin + life_year * box_height) + 'mm'), 
             size=(str(box_width) + 'mm', str(box_height) + 'mm'),
-            style="fill:#ffffff;stroke:#c0c0c0;stroke-width:1px"
+            style="fill:#ffffff;stroke:#c0c0c0;stroke-width:0.1mm"
         )
         dwg.add(rect)
 
