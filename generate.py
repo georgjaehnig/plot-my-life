@@ -59,6 +59,9 @@ for year in range(birthday.year,birthday.year+80):
 
 for year in range(birthday.year,birthday.year+80):
     for week in range(1,54):
+        # Show weeks in first year only after birthday.
+        if (year == birthday.year) and (week < birthday.isocalendar()[1]):
+            continue
         # Show 53rd week only if exists.
         if (week == 53) and not has_53_weeks(year):
             continue
@@ -68,5 +71,12 @@ for year in range(birthday.year,birthday.year+80):
             style="fill:#ffffff;stroke:#c0c0c0;stroke-width:0.1mm"
         )
         dwg.add(rect)
+        if (year % 5 == 0) and (year > birthday.year):
+            line = svgwrite.shapes.Line(
+                start=(str(boxes_x_margin + week * box_width) + 'mm', str(boxes_y_margin + (year-birthday.year)  * box_height) + 'mm'), 
+                end=(str(boxes_x_margin + week * box_width + box_width) + 'mm', str(boxes_y_margin + (year-birthday.year)  * box_height) + 'mm'), 
+                style="stroke:#000000;stroke-width:0.1mm"
+            )
+            dwg.add(line)
 
 dwg.save()
