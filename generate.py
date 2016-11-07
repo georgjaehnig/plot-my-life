@@ -79,5 +79,13 @@ for year in range(birthday.year,birthday.year+80):
                 style="stroke:#000000;stroke-width:0.1mm"
             )
             dwg.add(line)
+        # Show vertical helper lines.
+        if (week % 5 == 0) and (week > 0):
+            line = svgwrite.shapes.Line(
+                start=(str(boxes_x_margin + week * box_width) + 'mm', str(boxes_y_margin + (year-birthday.year)  * box_height) + 'mm'), 
+                end=(str(boxes_x_margin + week * box_width) + 'mm', str(boxes_y_margin + (year-birthday.year)  * box_height + box_height) + 'mm'), 
+                style="stroke:#000000;stroke-width:0.1mm"
+            )
+            dwg.add(line)
 
 dwg.save()
