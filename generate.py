@@ -57,7 +57,6 @@ for year in range(birthday.year,birthday.year+80):
     text.add(tspan)
     dwg.add(text)
 
-#for life_year in range(0,80):
 for year in range(birthday.year,birthday.year+80):
     for week in range(1,54):
         # Show 53rd week only if exists.
