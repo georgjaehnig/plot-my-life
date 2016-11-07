@@ -60,6 +60,7 @@ for year in range(birthday.year,birthday.year+80):
 #for life_year in range(0,80):
 for year in range(birthday.year,birthday.year+80):
     for week in range(1,54):
+        # Show 53rd week only if exists.
         if (week == 53) and not has_53_weeks(year):
             continue
         rect = svgwrite.shapes.Rect(
