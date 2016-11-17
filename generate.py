@@ -38,7 +38,7 @@ def generate(settings_files):
             ), 
             style = settings['weeks']['style']
         )
-        text = dwg.text('', style='font-size:10px')
+        text = dwg.text('', style=settings['weeks']['text']['style'])
         text.add(tspan)
         dwg.add(text)
 
@@ -51,7 +51,7 @@ def generate(settings_files):
             ), 
             style = settings['life_years']['style']
         )
-        text = dwg.text('', style='font-size:10px')
+        text = dwg.text('', style=settings['life_years']['text']['style'])
         text.add(tspan)
         dwg.add(text)
 
@@ -64,7 +64,7 @@ def generate(settings_files):
             ), 
             style = settings['years']['style']
         )
-        text = dwg.text('', style='font-size:10px')
+        text = dwg.text('', style=settings['years']['text']['style'])
         text.add(tspan)
         dwg.add(text)
 
