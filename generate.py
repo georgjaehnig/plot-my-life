@@ -45,7 +45,10 @@ def generate(settings_files):
     for life_year in range(0,80):
         tspan = svgwrite.text.TSpan(
             str(life_year), 
-            insert=(str(settings['life_years']['margins']['x']) + 'mm', str(settings['life_years']['margins']['y'] + life_year * settings['boxes']['size']['height']) + 'mm'), 
+            insert = (
+                str(settings['life_years']['margins']['x']) + 'mm', 
+                str(settings['life_years']['margins']['y'] + life_year * settings['boxes']['size']['height']) + 'mm'
+            ), 
             style='text-align:right;text-anchor:end'
         )
         text = dwg.text('', style='font-size:10px')
