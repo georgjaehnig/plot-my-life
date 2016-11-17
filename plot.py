@@ -30,6 +30,8 @@ def plot(settings_files):
     # Create drawing.
     if settings['name'] == 'weeks':
         dwg = plot_weeks(settings)
+    if settings['name'] == 'months':
+        dwg = plot_months(settings)
 
     return dwg.tostring()
 
@@ -122,6 +124,102 @@ def plot_weeks(settings):
                     ), 
                     end = (
                         str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', 
+                        str(
+                            settings['boxes']['margins']['y'] + 
+                            (year - settings['birthday'].year) * settings['boxes']['size']['height'] + 
+                            settings['boxes']['size']['height']) + 'mm'
+                    ), 
+                    style = settings['helper']['vertical']['style']
+                )
+                dwg.add(line)
+    return dwg
+
+def plot_months(settings):
+    dwg = svgwrite.Drawing(size=(u'210mm', u'297mm'))
+    g = dwg.g()
+
+    # Plot top scale.
+    for i in range(settings['scales']['top']['count']):
+        tspan = svgwrite.text.TSpan(
+            str(i + settings['scales']['top']['offset']), 
+            insert = (
+                str(settings['scales']['top']['margins']['x'] + i * settings['boxes']['size']['width'] + settings['boxes']['size']['width']/2) + 'mm',
+                str(settings['scales']['top']['margins']['y']) + 'mm'
+            ), 
+            style = settings['scales']['top']['style']
+        )
+        text = dwg.text('', style=settings['scales']['top']['text']['style'])
+        text.add(tspan)
+        dwg.add(text)
+
+    # Plot life years scale.
+    for life_year in range(0,80):
+        tspan = svgwrite.text.TSpan(
+            str(life_year), 
+            insert = (
+                str(settings['life_years']['margins']['x']) + 'mm', 
+                str(settings['life_years']['margins']['y'] + life_year * settings['boxes']['size']['height']) + 'mm'
+            ), 
+            style = settings['life_years']['style']
+        )
+        text = dwg.text('', style=settings['life_years']['text']['style'])
+        text.add(tspan)
+        dwg.add(text)
+
+    # Plot years scale.
+    for year in range(settings['birthday'].year,settings['birthday'].year+80):
+        tspan = svgwrite.text.TSpan(
+            str(year), 
+            insert = (
+                str(settings['years']['margins']['x']) + 'mm', 
+                str(settings['years']['margins']['y'] + (year-settings['birthday'].year) * settings['boxes']['size']['height']) + 'mm'
+            ), 
+            style = settings['years']['style']
+        )
+        text = dwg.text('', style=settings['years']['text']['style'])
+        text.add(tspan)
+        dwg.add(text)
+
+    # Plot boxes.
+    for year in range(settings['birthday'].year,settings['birthday'].year+80):
+        for i in range(12):
+            # Show is in first year only after settings['birthday'].
+            if (year == settings['birthday'].year) and (i + settings['scales']['top']['offset'] < settings['birthday'].month):
+                continue
+            rect = svgwrite.shapes.Rect(
+                insert = (
+                    str(settings['boxes']['margins']['x'] + i * settings['boxes']['size']['width']) + 'mm', 
+                    str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'
+                ), 
+                size=(str(settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['size']['height']) + 'mm'),
+                style = settings['boxes']['style']
+            )
+            dwg.add(rect)
+
+            # Show horizontal helper lines.
+            if (year % 5 == 0) and (year > settings['birthday'].year):
+                line = svgwrite.shapes.Line(
+                    start = (
+                        str(settings['boxes']['margins']['x'] + i * settings['boxes']['size']['width']) + 'mm', 
+                        str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'
+                    ), 
+                    end = (
+                        str(settings['boxes']['margins']['x'] + i * settings['boxes']['size']['width'] + settings['boxes']['size']['width']) + 'mm',
+                        str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'
+                    ), 
+                    style = settings['helper']['horizontal']['style']
+                )
+                dwg.add(line)
+
+            # Show vertical helper lines.
+            if (i % 5 == 0) and (i > 0):
+                line = svgwrite.shapes.Line(
+                    start = (
+                        str(settings['boxes']['margins']['x'] + i * settings['boxes']['size']['width']) + 'mm', 
+                        str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'
+                    ), 
+                    end = (
+                        str(settings['boxes']['margins']['x'] + i * settings['boxes']['size']['width']) + 'mm', 
                         str(
                             settings['boxes']['margins']['y'] + 
                             (year - settings['birthday'].year) * settings['boxes']['size']['height'] + 
