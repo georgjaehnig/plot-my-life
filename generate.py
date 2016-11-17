@@ -36,7 +36,7 @@ def generate(settings_files):
                 str(settings['weeks']['margins']['x'] + week * settings['boxes']['size']['width'] + settings['boxes']['size']['width']/2) + 'mm',
                 str(settings['weeks']['margins']['y']) + 'mm'
             ), 
-            style='text-align:center;text-anchor:middle'
+            style = settings['weeks']['style']
         )
         text = dwg.text('', style='font-size:10px')
         text.add(tspan)
@@ -49,7 +49,7 @@ def generate(settings_files):
                 str(settings['life_years']['margins']['x']) + 'mm', 
                 str(settings['life_years']['margins']['y'] + life_year * settings['boxes']['size']['height']) + 'mm'
             ), 
-            style='text-align:right;text-anchor:end'
+            style = settings['life_years']['style']
         )
         text = dwg.text('', style='font-size:10px')
         text.add(tspan)
@@ -62,7 +62,7 @@ def generate(settings_files):
                 str(settings['years']['margins']['x']) + 'mm', 
                 str(settings['years']['margins']['y'] + (year-settings['birthday'].year) * settings['boxes']['size']['height']) + 'mm'
             ), 
-            style='text-align:right;text-anchor:end'
+            style = settings['years']['style']
         )
         text = dwg.text('', style='font-size:10px')
         text.add(tspan)
@@ -79,7 +79,7 @@ def generate(settings_files):
             rect = svgwrite.shapes.Rect(
                 insert=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'), 
                 size=(str(settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['size']['height']) + 'mm'),
-                style="fill:#ffffff;stroke:#606060;stroke-width:0.1mm"
+                style = settings['boxes']['style']
             )
             dwg.add(rect)
             # Show horizontal helper lines.

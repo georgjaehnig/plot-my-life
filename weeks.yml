@@ -2,14 +2,17 @@ weeks:
   margins:
     x: 8
     y: 7
+  style: 'text-align:center;text-anchor:middle'
 years:
   margins:
     x: 204
     y: 10.6
+  style: 'text-align:right;text-anchor:end'
 life_years:
   margins:
     x: 9
     y: 10.6
+  style: 'text-align:right;text-anchor:end'
 boxes:
   margins:
     x: 8
@@ -17,3 +20,4 @@ boxes:
   size:
     width: 3.5
     height: 3.5
+  style: 'fill:#ffffff;stroke:#606060;stroke-width:0.1mm'
