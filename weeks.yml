@@ -8,21 +8,21 @@ weeks:
 years:
   margins:
     x: 204
-    y: 10.6
+    y: 11.6
   style: 'text-align:right;text-anchor:end'
   text:
     style: 'font-size:10px'
 life_years:
   margins:
     x: 9
-    y: 10.6
+    y: 11.6
   style: 'text-align:right;text-anchor:end'
   text:
     style: 'font-size:10px'
 boxes:
   margins:
     x: 8
-    y: 8
+    y: 9
   size:
     width: 3.5
     height: 3.5
