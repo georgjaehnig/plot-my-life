@@ -6,12 +6,12 @@ Plot My Life is a python script that generates an SVG file which visualizes your
 
 ## Usage
 
-    $ echo 'birthday: 1990-07-01' | python3 generate.py presets/weeks.yml > my-life.svg
+    $ echo 'birthday: 1990-07-01' | python3 plot.py presets/weeks.yml > my-life.svg
 
 Because it writes the SVG to STDOUT, you can also chain it to other programs, for example to [rsvg](http://librsvg.sourceforge.net/docs/man-rsvg.php):
 
-    $ echo 'birthday: 1990-07-01' | python3 generate.py presets/weeks.yml | rsvg-convert -f pdf > my-life.pdf
+    $ echo 'birthday: 1990-07-01' | python3 plot.py presets/weeks.yml | rsvg-convert -f pdf > my-life.pdf
 
 You can override the settings with adding more YAML files as arguments. In this case, the birtday setting is put into `override.yml`:
 
-    $ python3 generate.py presets/weeks.yml override.yml > my-life.svg
+    $ python3 plot.py presets/weeks.yml override.yml > my-life.svg
