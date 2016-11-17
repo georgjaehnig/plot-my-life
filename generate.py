@@ -23,7 +23,8 @@ def generate(settings_files):
         current_settings = yaml.load(sys.stdin)
         settings = {**settings, **current_settings}
 
-    birthday = datetime.date(1980, 3, 20)
+    if not settings['birthday']:
+        settings['birthday'] = datetime.date(1990, 1, 1)
 
     dwg = svgwrite.Drawing(filename=u'life-weeks.svg', size=(u'210mm', u'297mm'))
     g = dwg.g(style="font-family:Arial")
@@ -48,43 +49,43 @@ def generate(settings_files):
         text.add(tspan)
         dwg.add(text)
 
-    for year in range(birthday.year,birthday.year+80):
+    for year in range(settings['birthday'].year,settings['birthday'].year+80):
         tspan = svgwrite.text.TSpan(
             str(year), 
-            insert=(str(settings['years']['margins']['x']) + 'mm', str(settings['years']['margins']['y'] + (year-birthday.year) * settings['boxes']['size']['height']) + 'mm'), 
+            insert=(str(settings['years']['margins']['x']) + 'mm', str(settings['years']['margins']['y'] + (year-settings['birthday'].year) * settings['boxes']['size']['height']) + 'mm'), 
             style='text-align:right;text-anchor:end'
         )
         text = dwg.text('', style='font-size:10px')
         text.add(tspan)
         dwg.add(text)
 
-    for year in range(birthday.year,birthday.year+80):
+    for year in range(settings['birthday'].year,settings['birthday'].year+80):
         for week in range(1,54):
-            # Show weeks in first year only after birthday.
-            if (year == birthday.year) and (week < birthday.isocalendar()[1]):
+            # Show weeks in first year only after settings['birthday'].
+            if (year == settings['birthday'].year) and (week < settings['birthday'].isocalendar()[1]):
                 continue
             # Show 53rd week only if exists.
             if (week == 53) and not has_53_weeks(year):
                 continue
             rect = svgwrite.shapes.Rect(
-                insert=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-birthday.year)  * settings['boxes']['size']['height']) + 'mm'), 
+                insert=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'), 
                 size=(str(settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['size']['height']) + 'mm'),
                 style="fill:#ffffff;stroke:#606060;stroke-width:0.1mm"
             )
             dwg.add(rect)
             # Show horizontal helper lines.
-            if (year % 5 == 0) and (year > birthday.year):
+            if (year % 5 == 0) and (year > settings['birthday'].year):
                 line = svgwrite.shapes.Line(
-                    start=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-birthday.year)  * settings['boxes']['size']['height']) + 'mm'), 
-                    end=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width'] + settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-birthday.year)  * settings['boxes']['size']['height']) + 'mm'), 
+                    start=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'), 
+                    end=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width'] + settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'), 
                     style="stroke:#000000;stroke-width:0.1mm"
                 )
                 dwg.add(line)
             # Show vertical helper lines.
             if (week % 5 == 0) and (week > 0):
                 line = svgwrite.shapes.Line(
-                    start=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-birthday.year)  * settings['boxes']['size']['height']) + 'mm'), 
-                    end=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-birthday.year)  * settings['boxes']['size']['height'] + settings['boxes']['size']['height']) + 'mm'), 
+                    start=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'), 
+                    end=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height'] + settings['boxes']['size']['height']) + 'mm'), 
                     style="stroke:#000000;stroke-width:0.1mm"
                 )
                 dwg.add(line)
