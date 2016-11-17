@@ -2,14 +2,26 @@ import svgwrite
 import datetime
 import yaml
 
+import sys
+import argparse
+
+
 def has_53_weeks(year):
     date = datetime.date(year, 12, 31)
     week = date.isocalendar()[1]
     return (week == 53)
 
-def generate():
-    with open("weeks.yml", 'r') as stream:
-        settings = yaml.load(stream)
+def generate(settings_files):
+
+    settings = {}
+    for settings_file in settings_files:
+        with open(settings_file, 'r') as stream:
+            current_settings = yaml.load(stream)
+            settings = {**settings, **current_settings}
+
+    if not sys.stdin.isatty():
+        current_settings = yaml.load(sys.stdin)
+        settings = {**settings, **current_settings}
 
     birthday = datetime.date(1980, 3, 20)
 
@@ -79,4 +91,16 @@ def generate():
 
     dwg.save()
 
-generate()
+ap = argparse.ArgumentParser()
+
+ap.add_argument(
+    "settings_file", 
+    help="YAML file with settings.",
+    type=str,
+    nargs='+'
+)
+
+args = ap.parse_args()
+
+if args.settings_file:
+    generate(args.settings_file)
