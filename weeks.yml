@@ -1,0 +1,19 @@
+weeks:
+  margins:
+    x: 8
+    y: 7
+years:
+  margins:
+    x: 204
+    y: 10.6
+life_years:
+  margins:
+    x: 9
+    y: 10.6
+boxes:
+  margins:
+    x: 8
+    y: 8
+  size:
+    width: 3.5
+    height: 3.5
