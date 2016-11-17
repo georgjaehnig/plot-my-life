@@ -15,17 +15,17 @@ g = dwg.g(style="font-family:Arial")
 box_width = 3.5
 box_height = 3.5
 
-weeks_x_margin = 4
-weeks_y_margin = 5
+weeks_x_margin = 8
+weeks_y_margin = 7
 
-life_years_x_margin = 5
-life_years_y_margin = 8.6
+life_years_x_margin = 9
+life_years_y_margin = 10.6
 
-years_x_margin = 200
-years_y_margin = 8.6
+years_x_margin = 204
+years_y_margin = 10.6
 
-boxes_x_margin = 4
-boxes_y_margin = 6
+boxes_x_margin = 8
+boxes_y_margin = 8
 
 for week in range(1,54):
     tspan = svgwrite.text.TSpan(
@@ -68,7 +68,7 @@ for year in range(birthday.year,birthday.year+80):
         rect = svgwrite.shapes.Rect(
             insert=(str(boxes_x_margin + week * box_width) + 'mm', str(boxes_y_margin + (year-birthday.year)  * box_height) + 'mm'), 
             size=(str(box_width) + 'mm', str(box_height) + 'mm'),
-            style="fill:#ffffff;stroke:#c0c0c0;stroke-width:0.1mm"
+            style="fill:#ffffff;stroke:#606060;stroke-width:0.1mm"
         )
         dwg.add(rect)
         # Show horizontal helper lines.
