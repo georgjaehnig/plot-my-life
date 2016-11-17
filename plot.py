@@ -28,7 +28,7 @@ def generate(settings_files):
         settings['birthday'] = datetime.date(1990, 1, 1)
 
     # Create drawing.
-    dwg = svgwrite.Drawing(filename=u'life-weeks.svg', size=(u'210mm', u'297mm'))
+    dwg = svgwrite.Drawing(size=(u'210mm', u'297mm'))
     g = dwg.g()
 
     if settings['name'] == 'weeks':
