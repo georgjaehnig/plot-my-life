@@ -32,7 +32,10 @@ def generate(settings_files):
     for week in range(1,54):
         tspan = svgwrite.text.TSpan(
             str(week), 
-            insert=(str(settings['weeks']['margins']['x'] + week * settings['boxes']['size']['width'] + settings['boxes']['size']['width']/2) + 'mm', str(settings['weeks']['margins']['y']) + 'mm'), 
+            insert = (
+                str(settings['weeks']['margins']['x'] + week * settings['boxes']['size']['width'] + settings['boxes']['size']['width']/2) + 'mm',
+                str(settings['weeks']['margins']['y']) + 'mm'
+            ), 
             style='text-align:center;text-anchor:middle'
         )
         text = dwg.text('', style='font-size:10px')
@@ -52,7 +55,10 @@ def generate(settings_files):
     for year in range(settings['birthday'].year,settings['birthday'].year+80):
         tspan = svgwrite.text.TSpan(
             str(year), 
-            insert=(str(settings['years']['margins']['x']) + 'mm', str(settings['years']['margins']['y'] + (year-settings['birthday'].year) * settings['boxes']['size']['height']) + 'mm'), 
+            insert = (
+                str(settings['years']['margins']['x']) + 'mm', 
+                str(settings['years']['margins']['y'] + (year-settings['birthday'].year) * settings['boxes']['size']['height']) + 'mm'
+            ), 
             style='text-align:right;text-anchor:end'
         )
         text = dwg.text('', style='font-size:10px')
@@ -76,16 +82,31 @@ def generate(settings_files):
             # Show horizontal helper lines.
             if (year % 5 == 0) and (year > settings['birthday'].year):
                 line = svgwrite.shapes.Line(
-                    start=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'), 
-                    end=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width'] + settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'), 
+                    start = (
+                        str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', 
+                        str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'
+                    ), 
+                    end = (
+                        str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width'] + settings['boxes']['size']['width']) + 'mm',
+                        str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'
+                    ), 
                     style="stroke:#000000;stroke-width:0.1mm"
                 )
                 dwg.add(line)
             # Show vertical helper lines.
             if (week % 5 == 0) and (week > 0):
                 line = svgwrite.shapes.Line(
-                    start=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'), 
-                    end=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height'] + settings['boxes']['size']['height']) + 'mm'), 
+                    start = (
+                        str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', 
+                        str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'
+                    ), 
+                    end = (
+                        str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', 
+                        str(
+                            settings['boxes']['margins']['y'] + 
+                            (year - settings['birthday'].year) * settings['boxes']['size']['height'] + 
+                            settings['boxes']['size']['height']) + 'mm'
+                    ), 
                     style="stroke:#000000;stroke-width:0.1mm"
                 )
                 dwg.add(line)
