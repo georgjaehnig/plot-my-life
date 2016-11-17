@@ -12,8 +12,6 @@ Because it writes the SVG to STDOUT, you can also chain it to other programs, fo
 
     $ echo 'birthday: 1990-07-01' | python3 generate.py presets/weeks.yml | rsvg-convert -f pdf > my-life.pdf
 
-You can override the styles with adding more YAML files as arguments, for example
+You can override the settings with adding more YAML files as arguments. In this case, the birtday setting is put into `override.yml`:
 
-    $ echo 'birthday: 1990-07-01' | python3 generate.py presets/weeks.yml override.yml > my-life.svg
-
-will add settings from `override.yml`
+    $ python3 generate.py presets/weeks.yml override.yml > my-life.svg
