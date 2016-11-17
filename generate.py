@@ -13,6 +13,7 @@ def has_53_weeks(year):
 
 def generate(settings_files):
 
+    # Read settings.
     settings = {}
     for settings_file in settings_files:
         with open(settings_file, 'r') as stream:
@@ -26,9 +27,11 @@ def generate(settings_files):
     if not settings['birthday']:
         settings['birthday'] = datetime.date(1990, 1, 1)
 
+    # Create drawing.
     dwg = svgwrite.Drawing(filename=u'life-weeks.svg', size=(u'210mm', u'297mm'))
     g = dwg.g()
 
+    # Plot week scale.
     for week in range(1,54):
         tspan = svgwrite.text.TSpan(
             str(week), 
@@ -42,6 +45,7 @@ def generate(settings_files):
         text.add(tspan)
         dwg.add(text)
 
+    # Plot life years scale.
     for life_year in range(0,80):
         tspan = svgwrite.text.TSpan(
             str(life_year), 
@@ -55,6 +59,7 @@ def generate(settings_files):
         text.add(tspan)
         dwg.add(text)
 
+    # Plot years scale.
     for year in range(settings['birthday'].year,settings['birthday'].year+80):
         tspan = svgwrite.text.TSpan(
             str(year), 
@@ -68,6 +73,7 @@ def generate(settings_files):
         text.add(tspan)
         dwg.add(text)
 
+    # Plot boxes.
     for year in range(settings['birthday'].year,settings['birthday'].year+80):
         for week in range(1,54):
             # Show weeks in first year only after settings['birthday'].
@@ -85,6 +91,7 @@ def generate(settings_files):
                 style = settings['boxes']['style']
             )
             dwg.add(rect)
+
             # Show horizontal helper lines.
             if (year % 5 == 0) and (year > settings['birthday'].year):
                 line = svgwrite.shapes.Line(
@@ -99,6 +106,7 @@ def generate(settings_files):
                     style = settings['helper']['horizontal']['style']
                 )
                 dwg.add(line)
+
             # Show vertical helper lines.
             if (week % 5 == 0) and (week > 0):
                 line = svgwrite.shapes.Line(
