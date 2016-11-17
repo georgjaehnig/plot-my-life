@@ -117,7 +117,8 @@ def generate(settings_files):
                 )
                 dwg.add(line)
 
-    dwg.save()
+    return dwg.tostring()
+
 
 ap = argparse.ArgumentParser()
 
@@ -131,4 +132,5 @@ ap.add_argument(
 args = ap.parse_args()
 
 if args.settings_file:
-    generate(args.settings_file)
+    svg = generate(args.settings_file)
+    print(svg)
