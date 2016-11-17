@@ -77,7 +77,10 @@ def generate(settings_files):
             if (week == 53) and not has_53_weeks(year):
                 continue
             rect = svgwrite.shapes.Rect(
-                insert=(str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'), 
+                insert = (
+                    str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width']) + 'mm', 
+                    str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'
+                ), 
                 size=(str(settings['boxes']['size']['width']) + 'mm', str(settings['boxes']['size']['height']) + 'mm'),
                 style = settings['boxes']['style']
             )
