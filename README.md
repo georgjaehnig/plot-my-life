@@ -1,6 +1,6 @@
 # Plot My Life
 
-Plot My Life is a python script that generates an SVG file which visualizes your life time. An example with weeks, based on ''[Your Life in Weeks](http://waitbutwhy.com/2014/05/life-weeks.html)'':
+Plot My Life is a python script that generates an SVG file which visualizes your life time. An example with weeks, based on *[Your Life in Weeks](http://waitbutwhy.com/2014/05/life-weeks.html)*:
 
 ![Weeks](examples/weeks.png)
 
