@@ -11,7 +11,7 @@ def has_53_weeks(year):
     week = date.isocalendar()[1]
     return (week == 53)
 
-def generate(settings_files):
+def plot(settings_files):
 
     # Read settings.
     settings = {}
@@ -141,5 +141,5 @@ ap.add_argument(
 args = ap.parse_args()
 
 if args.settings_file:
-    svg = generate(args.settings_file)
+    svg = plot(args.settings_file)
     print(svg)
