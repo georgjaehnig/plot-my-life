@@ -27,7 +27,7 @@ def generate(settings_files):
         settings['birthday'] = datetime.date(1990, 1, 1)
 
     dwg = svgwrite.Drawing(filename=u'life-weeks.svg', size=(u'210mm', u'297mm'))
-    g = dwg.g(style="font-family:Arial")
+    g = dwg.g()
 
     for week in range(1,54):
         tspan = svgwrite.text.TSpan(
