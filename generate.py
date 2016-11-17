@@ -96,7 +96,7 @@ def generate(settings_files):
                         str(settings['boxes']['margins']['x'] + week * settings['boxes']['size']['width'] + settings['boxes']['size']['width']) + 'mm',
                         str(settings['boxes']['margins']['y'] + (year-settings['birthday'].year)  * settings['boxes']['size']['height']) + 'mm'
                     ), 
-                    style="stroke:#000000;stroke-width:0.1mm"
+                    style = settings['helper']['horizontal']['style']
                 )
                 dwg.add(line)
             # Show vertical helper lines.
@@ -113,7 +113,7 @@ def generate(settings_files):
                             (year - settings['birthday'].year) * settings['boxes']['size']['height'] + 
                             settings['boxes']['size']['height']) + 'mm'
                     ), 
-                    style="stroke:#000000;stroke-width:0.1mm"
+                    style = settings['helper']['vertical']['style']
                 )
                 dwg.add(line)
 

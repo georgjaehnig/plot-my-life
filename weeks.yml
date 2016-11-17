@@ -27,3 +27,8 @@ boxes:
     width: 3.5
     height: 3.5
   style: 'fill:#ffffff;stroke:#606060;stroke-width:0.1mm'
+helper:
+  horizontal:
+    style: 'stroke:#000000;stroke-width:0.1mm'
+  vertical:
+    style: 'stroke:#000000;stroke-width:0.1mm'
