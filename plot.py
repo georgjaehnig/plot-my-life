@@ -197,7 +197,7 @@ def plot_months(settings):
             dwg.add(rect)
 
             # Show horizontal helper lines.
-            if (year % 5 == 0) and (year > settings['birthday'].year):
+            if (year % settings['helper']['horizontal']['major'] == 0) and (year > settings['birthday'].year):
                 line = svgwrite.shapes.Line(
                     start = (
                         str(settings['boxes']['margins']['x'] + i * settings['boxes']['size']['width']) + 'mm', 
@@ -212,7 +212,7 @@ def plot_months(settings):
                 dwg.add(line)
 
             # Show vertical helper lines.
-            if (i % 5 == 0) and (i > 0):
+            if (i % settings['helper']['vertical']['major'] == 0) and (i > 0):
                 line = svgwrite.shapes.Line(
                     start = (
                         str(settings['boxes']['margins']['x'] + i * settings['boxes']['size']['width']) + 'mm', 
